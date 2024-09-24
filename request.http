@@ -1,0 +1,82 @@
+###
+# curl -X 'POST'
+#  'http://127.0.0.1:8000/users/register'
+#  -H 'accept: application/json'
+#  -H 'Content-Type: application/json'
+#  -d '{
+#  "name": "aamna",
+#  "username": "aa",
+#  "email": "aamna@gmail.com",
+#  "password": "aamna123"
+#}'
+POST http://127.0.0.1:8000/users/register
+accept: application/json
+Content-Type: application/json
+
+{
+  "name": "aamna",
+  "username": "aa",
+  "email": "aamna@gmail.com",
+  "password": "aamna123"
+}
+
+###
+
+# curl -X 'POST'
+#  'http://127.0.0.1:8000/users/login'
+#  -H 'accept: application/json'
+#  -H 'Content-Type: application/x-www-form-urlencoded'
+#  -d 'grant_type=password&username=aa&password=aamna123&scope=&client_id=&client_secret=string'
+POST http://127.0.0.1:8000/users/login
+accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&username=aa&password=aamna123&scope=&client_id=&client_secret=string
+
+> {% client.global.set("access_token", response.body.access_token) %}
+
+###
+
+# curl -X 'GET'
+#  'http://127.0.0.1:8000/logs/'
+#  -H 'accept: application/json'
+#  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYSIsImV4cCI6MTcyNzA3ODk4OH0.Dd5z8rcvKNVJSFGJXX-gz-NHdQIfw92mfvgzVSz7pbE"
+GET http://127.0.0.1:8000/logs/
+accept: application/json
+Authorization: Bearer {{access_token}}
+###
+
+###
+
+# curl -X 'POST'
+#  'http://127.0.0.1:8000/generate/'
+#  -H 'accept: application/json'
+#  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYSIsImV4cCI6MTcyNzA3ODk4OH0.Dd5z8rcvKNVJSFGJXX-gz-NHdQIfw92mfvgzVSz7pbE"
+#  -H 'Content-Type: application/json'
+#  -d '{
+#  "user_input": "aamna",
+#  "reply_to": "danish",
+#  "context": "Work History",
+#  "length": 120,
+#  "tone": "formal"
+#}'
+
+POST http://127.0.0.1:8000/generate/
+accept: application/json
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "user_input": "Thank you for your support on the project. Please provide updates on the current status.",
+  "reply_to": "Danish",
+  "context": "Work History",
+  "length": 500,
+  "tone": "formal"
+}
+
+
+###
+
+
+
+
